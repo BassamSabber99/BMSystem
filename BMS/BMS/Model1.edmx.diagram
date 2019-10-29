@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b6b57de0db9a44ef9fb6b0aba8f89504" Name="Diagram1">
+        <EntityTypeShape EntityType="BMSModel.Accountant" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Admin" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Customer" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Deposit" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMSModel.Withdraw" Width="1.5" PointX="7.5" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="BMSModel.FK_Deposit_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.FK_Withdraw_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.Acc_manage_cust" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.adm_Control_cust" ManuallyRouted="false" />
+        <AssociationConnector Association="BMSModel.Adm_Manage_Acc" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

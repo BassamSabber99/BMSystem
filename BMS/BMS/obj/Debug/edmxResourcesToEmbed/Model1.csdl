@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BMSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BMSEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Accountants" EntityType="BMSModel.Accountant" />
+    <EntitySet Name="Admins" EntityType="BMSModel.Admin" />
+    <EntitySet Name="Customers" EntityType="BMSModel.Customer" />
+    <EntitySet Name="Deposits" EntityType="BMSModel.Deposit" />
+    <EntitySet Name="sysdiagrams" EntityType="BMSModel.sysdiagram" />
+    <EntitySet Name="Withdraws" EntityType="BMSModel.Withdraw" />
+    <AssociationSet Name="FK_Deposit_Customer" Association="BMSModel.FK_Deposit_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Deposit" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Withdraw_Customer" Association="BMSModel.FK_Withdraw_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Withdraw" EntitySet="Withdraws" />
+    </AssociationSet>
+    <AssociationSet Name="Acc_manage_cust" Association="BMSModel.Acc_manage_cust">
+      <End Role="Accountant" EntitySet="Accountants" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="adm_Control_cust" Association="BMSModel.adm_Control_cust">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="Adm_Manage_Acc" Association="BMSModel.Adm_Manage_Acc">
+      <End Role="Accountant" EntitySet="Accountants" />
+      <End Role="Admin" EntitySet="Admins" />
+    </AssociationSet>
+    <FunctionImport Name="loginfunc" ReturnType="Collection(BMSModel.loginfunc_Result)" IsComposable="true">
+      <Parameter Name="userid" Type="Int32" />
+      <Parameter Name="password" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="addacc">
+      <Parameter Name="Pass" Mode="In" Type="String" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="Int32" />
+      <Parameter Name="gend" Mode="In" Type="String" />
+      <Parameter Name="Addres" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="accountantID" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="addcus">
+      <Parameter Name="pass" Mode="In" Type="String" />
+      <Parameter Name="fname" Mode="In" Type="String" />
+      <Parameter Name="lname" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="Int32" />
+      <Parameter Name="adres" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="balance" Mode="In" Type="Decimal" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="convertmon">
+      <Parameter Name="mon" Mode="In" Type="Decimal" />
+      <Parameter Name="id1" Mode="In" Type="Int32" />
+      <Parameter Name="id2" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="cusInfoByID" ReturnType="Collection(BMSModel.cusInfoByID_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deletacc">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deletcus">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="deposites">
+      <Parameter Name="Depositmoney" Mode="In" Type="Decimal" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="total" Mode="InOut" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BMSModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BMSModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="updateacc">
+      <Parameter Name="Pass" Mode="In" Type="String" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="Int32" />
+      <Parameter Name="Addres" Mode="In" Type="String" />
+      <Parameter Name="ema" Mode="In" Type="String" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="updatecuss">
+      <Parameter Name="Pass" Mode="In" Type="String" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="Int32" />
+      <Parameter Name="Addres" Mode="In" Type="String" />
+      <Parameter Name="ema" Mode="In" Type="String" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="withdraws1">
+      <Parameter Name="withdrewmoney" Mode="In" Type="Decimal" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="total" Mode="InOut" Type="Decimal" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="loginfunc_Result">
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNumber" Type="Int32" />
+    <Property Name="address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="totalBalance" Type="Decimal" Precision="19" Scale="4" />
+  </ComplexType>
+  <EntityType Name="Accountant">
+    <Key>
+      <PropertyRef Name="accountantID" />
+    </Key>
+    <Property Name="accountantID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNumber" Type="Int32" />
+    <Property Name="gender" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Customers" Relationship="BMSModel.Acc_manage_cust" FromRole="Accountant" ToRole="Customer" />
+    <NavigationProperty Name="Admins" Relationship="BMSModel.Adm_Manage_Acc" FromRole="Accountant" ToRole="Admin" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="adminID" />
+    </Key>
+    <Property Name="adminID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNumber" Type="Int32" />
+    <Property Name="Address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="gender" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Customers" Relationship="BMSModel.adm_Control_cust" FromRole="Admin" ToRole="Customer" />
+    <NavigationProperty Name="Accountants" Relationship="BMSModel.Adm_Manage_Acc" FromRole="Admin" ToRole="Accountant" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Customer_ID" />
+    </Key>
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNumber" Type="Int32" />
+    <Property Name="address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="totalBalance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="gender" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Deposits" Relationship="BMSModel.FK_Deposit_Customer" FromRole="Customer" ToRole="Deposit" />
+    <NavigationProperty Name="Withdraws" Relationship="BMSModel.FK_Withdraw_Customer" FromRole="Customer" ToRole="Withdraw" />
+    <NavigationProperty Name="Accountants" Relationship="BMSModel.Acc_manage_cust" FromRole="Customer" ToRole="Accountant" />
+    <NavigationProperty Name="Admins" Relationship="BMSModel.adm_Control_cust" FromRole="Customer" ToRole="Admin" />
+  </EntityType>
+  <EntityType Name="Deposit">
+    <Key>
+      <PropertyRef Name="DeposID" />
+    </Key>
+    <Property Name="DeposID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Deposit_money" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Deposit_Date" Type="DateTime" Precision="0" />
+    <Property Name="CustID" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="BMSModel.FK_Deposit_Customer" FromRole="Deposit" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Withdraw">
+    <Key>
+      <PropertyRef Name="WithdrawID" />
+    </Key>
+    <Property Name="WithdrawID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Withdraw_money" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="WithdrawDate" Type="DateTime" Precision="0" />
+    <Property Name="CustID" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="BMSModel.FK_Withdraw_Customer" FromRole="Withdraw" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FK_Deposit_Customer">
+    <End Role="Customer" Type="BMSModel.Customer" Multiplicity="0..1" />
+    <End Role="Deposit" Type="BMSModel.Deposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="Deposit">
+        <PropertyRef Name="CustID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Withdraw_Customer">
+    <End Role="Customer" Type="BMSModel.Customer" Multiplicity="0..1" />
+    <End Role="Withdraw" Type="BMSModel.Withdraw" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="Withdraw">
+        <PropertyRef Name="CustID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Acc_manage_cust">
+    <End Role="Accountant" Type="BMSModel.Accountant" Multiplicity="*" />
+    <End Role="Customer" Type="BMSModel.Customer" Multiplicity="*" />
+  </Association>
+  <Association Name="adm_Control_cust">
+    <End Role="Admin" Type="BMSModel.Admin" Multiplicity="*" />
+    <End Role="Customer" Type="BMSModel.Customer" Multiplicity="*" />
+  </Association>
+  <Association Name="Adm_Manage_Acc">
+    <End Role="Accountant" Type="BMSModel.Accountant" Multiplicity="*" />
+    <End Role="Admin" Type="BMSModel.Admin" Multiplicity="*" />
+  </Association>
+  <ComplexType Name="cusInfoByID_Result">
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="PhoneNumber" Nullable="true" />
+    <Property Type="String" Name="address" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="totalBalance" Nullable="true" Precision="19" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Customer_ID" Nullable="false" />
+    <Property Type="String" Name="gender" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
